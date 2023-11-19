@@ -5,10 +5,23 @@ body {
   font-family: 'Manrope', sans-serif;
   color: #333;
   background: #f4f4f4;
+  overflow-x: hidden;
 }
 
 h1 {
   font-size: 2rem;
+  text-align: left;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1.5rem;
+  text-align: left;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.2rem;
   text-align: left;
   line-height: 1.2;
 }
@@ -53,8 +66,12 @@ section {
 
 .card-container {
   display: flex;
-  flex-direction: column;
+  flex-wrap: nowrap;
+  flex-direction: row;
   align-items: center;
+  width: 100vw; 
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
 
 .card {
@@ -62,7 +79,8 @@ section {
   border: 1px solid #ccc;
   margin-bottom: 10px;
   padding: 10px;
-  width: 80%;
+  width: 80vw;
+  scroll-snap-align: start;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 

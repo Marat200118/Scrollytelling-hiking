@@ -1,6 +1,7 @@
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   firstSectionAnimation();
+  secondSectionAnimation();
 };
 
 const firstSectionAnimation = () => {
@@ -9,7 +10,7 @@ const firstSectionAnimation = () => {
     opacity: 0,
     duration: 1,
     scrollTrigger: {
-      trigger: "#introduction",
+      trigger: ".introduction",
       start: "top 80%",
       toggleActions: "play none none none",
     },
@@ -19,11 +20,13 @@ const firstSectionAnimation = () => {
     opacity: 0,
     duration: 1,
     scrollTrigger: {
-      trigger: "#introduction",
+      trigger: ".introduction",
       start: "top 80%",
       toggleActions: "play none none none",
     },
   });
 };
+
+const secondSectionAnimation = () => {};
 
 init();
