@@ -1,0 +1,110 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Manrope', sans-serif;
+  color: #333;
+  background: #f4f4f4;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: left;
+  line-height: 1.2;
+}
+
+p {
+  text-align: left;
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+section {
+  padding: 20px;
+  text-align: center;
+}
+
+.introduction h1 {
+  color: #2b6d5f;
+  padding-top: 2rem;
+}
+
+.introduction p {
+  color: #555;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* .introduction img {
+  width: 10rem;
+} */
+
+.image-container {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 80%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.history-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.types-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-map {
+  text-align: left;
+}
+
+.maps {
+  overflow: hidden;
+}
+
+
+.fact {
+  margin-bottom: 10px;
+}
+
+.number {
+  font-size: 2em;
+  color: #27706b;
+}
+
+footer {
+  background-color: #7cd3d6;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .history-content, .types-content {
+    flex-direction: column;
+  }
+}

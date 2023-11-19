@@ -1,27 +1,28 @@
 const init = () => {
-  
   gsap.registerPlugin(ScrollTrigger);
+  firstSectionAnimation();
+};
 
-  let tl = gsap.timeline({
+const firstSectionAnimation = () => {
+  gsap.from(".introduction .from-left", {
+    x: -100,
+    opacity: 0,
+    duration: 1,
     scrollTrigger: {
-      trigger: ".square",
-      markers: { fontSize: "25px", fontWeight: "bold" },
+      trigger: "#introduction",
       start: "top 80%",
-      end: "top 30%",
-      scrub: 1,
+      toggleActions: "play none none none",
     },
   });
-  tl.to(".square", {
-    x: 400,
-    duration: 3,
-  });
-  tl.to(".square", {
-    y: 200,
-    duration: 2,
-  });
-  tl.to(".square", {
-    x: 200,
-    duration: 2,
+  gsap.from(".introduction .from-right", {
+    x: 100,
+    opacity: 0,
+    duration: 1,
+    scrollTrigger: {
+      trigger: "#introduction",
+      start: "top 80%",
+      toggleActions: "play none none none",
+    },
   });
 };
 
