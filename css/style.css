@@ -8,6 +8,10 @@ body {
   overflow-x: hidden;
 }
 
+html, body {
+  height: 100%;
+}
+
 h1 {
   font-size: 2rem;
   text-align: left;
@@ -38,8 +42,12 @@ img {
 }
 
 section {
+  min-height: 100vh;
   padding: 20px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .introduction h1 {
@@ -51,6 +59,11 @@ section {
   color: #555;
   margin-top: 2rem;
   margin-bottom: 2rem;
+}
+
+.introduction p span {
+  color: #00cd4f;
+  font-weight: bold;
 }
 
 /* .introduction img {
@@ -121,8 +134,79 @@ footer {
   text-align: center;
 }
 
+.spacer {
+  height: 20vh; 
+  background-color: #f4f4f4;
+}
+
 @media screen and (max-width: 600px) {
   .history-content, .types-content {
     flex-direction: column;
   }
+}
+
+.variants .variant {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.variant p {
+  text-align: center;
+  margin: 2rem;
+}
+
+.variant h3 {
+  text-align: center;
+  margin: 2rem;
+  font-weight: bold;
+}
+
+.variant img {
+  width: 80%;
+  border-radius: 5%;
+}
+
+.cross {
+  color: red;
+}
+
+.tick {
+  color: green;
+}
+
+.material-symbols-outlined {
+  font-size: 3rem !important;
+}
+
+.history {
+  overflow: hidden;
+  position: relative; /* Needed for proper functioning of ScrollTrigger */
+}
+
+.history-container {
+  display: flex;
+  position: relative;
+  display:flex;
+  flex-direction:row;
+  width: 100vw;
+  height: 100vh;
+  overflow:hidden;
+}
+
+.history-article {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.history-article img {
+  width: 50%;
+  border-radius: 5%;
 }
