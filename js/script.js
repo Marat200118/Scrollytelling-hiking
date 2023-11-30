@@ -13,31 +13,6 @@ const init = () => {
   animateHistory();
 };
 
-// const firstSectionAnimation = () => {
-//   gsap.from(".introduction .from-left", {
-//     x: -100,
-//     opacity: 0,
-//     duration: 1,
-//     scrollTrigger: {
-//       trigger: ".introduction",
-//       start: "top 80%",
-//       toggleActions: "play none none none",
-//     },
-//   });
-//   gsap.from(".introduction .from-right", {
-//     x: 100,
-//     opacity: 0,
-//     duration: 1,
-//     scrollTrigger: {
-//       trigger: ".introduction",
-//       start: "top 80%",
-//       toggleActions: "play none none none",
-//     },
-//   });
-// };
-
-// const secondSectionAnimation = () => {};
-
 const animateSection = (section) => {
   gsap.to(section, {
     scrollTrigger: {
@@ -105,6 +80,26 @@ const animateHistory = () => {
       markers: true,
     },
   });
+};
+
+const animateRect = () => {
+  gsap.set("rectangle", { xPercent: -50 });
+
+  let rotate = gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: ".rectangle-section",
+        pin: true,
+        scrub: 0.2,
+        start: "top top",
+        end: "+=10000",
+      },
+    })
+    .to("rectangle", {
+      rotation: 360 * 5,
+      duration: 1,
+      ease: "none",
+    });
 };
 
 init();

@@ -194,10 +194,8 @@ footer {
 .history-container {
   display: flex;
   position: relative;
-  display:flex;
-  flex-direction:row;
-  width: 200vw;
-  height: 100vh;
+  display: flex;
+  flex-direction: row;
   overflow:hidden;
 }
 
@@ -211,7 +209,32 @@ footer {
   align-items: center;
 }
 
+.history-article h3 {
+  text-align: center;
+  margin: 2rem;
+  font-weight: bold;
+}
+
+.history-article p {
+  text-align: left;
+  margin: 2rem;
+}
+
 .history-article img {
   width: 50%;
-  border-radius: 5%;
+  border-radius: 2%;
+}
+
+.rectangle-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rectangle{
+  left: 50%;
+  top: 100px;
+  width:10px;
+  height:150px;
+  background:green;
 }
