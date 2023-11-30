@@ -41,13 +41,18 @@ img {
   display: block;
 }
 
-section {
+/* section {
   min-height: 100vh;
   padding: 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+} */
+
+section {
+  padding: 20px;
+  text-align: center;
 }
 
 .introduction h1 {
@@ -191,7 +196,7 @@ footer {
   position: relative;
   display:flex;
   flex-direction:row;
-  width: 100vw;
+  width: 200vw;
   height: 100vh;
   overflow:hidden;
 }
