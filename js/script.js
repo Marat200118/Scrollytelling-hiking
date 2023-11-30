@@ -11,6 +11,7 @@ const init = () => {
   // document.querySelectorAll(".spacer").forEach(animateSpacer);
   animateVariants();
   animateHistory();
+  animateHeadings();
 };
 
 const animateSection = (section) => {
@@ -80,26 +81,6 @@ const animateHistory = () => {
       markers: true,
     },
   });
-};
-
-const animateRect = () => {
-  gsap.set("rectangle", { xPercent: -50 });
-
-  let rotate = gsap
-    .timeline({
-      scrollTrigger: {
-        trigger: ".rectangle-section",
-        pin: true,
-        scrub: 0.2,
-        start: "top top",
-        end: "+=10000",
-      },
-    })
-    .to("rectangle", {
-      rotation: 360 * 5,
-      duration: 1,
-      ease: "none",
-    });
 };
 
 init();
