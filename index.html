@@ -8,6 +8,7 @@
   <title>Scrollytelling</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
+  <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" /> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
@@ -34,7 +35,7 @@
     <h2>Some hint words:</h2>
   </section>
   <section class="heading-text">
-    <h2>MAP<br>NATURE<br>FIRE</h2>
+    <h2>MAP<br><br>NATURE<br><br>FIRE</h2>
   </section>
   <!-- <section class="spacer">
   </section> -->
@@ -126,18 +127,19 @@
   <section class="types-locations">
     <div class="types-heading">
       <h2>Different Hike types</h2>
-      <p class="types-paragraph">There is a Different types of hikes, which you can do, depending on your possibilities and
+      <p class="types-paragraph">There is a Different types of hikes, which you can do, depending on your possibilities
+        and
         your physical training </p>
     </div>
     <div class="small-spacer"></div>
 
     <section class="video-section">
-      <video id="scrollVideo" width="100%" height="auto" muted loop>
-        <source src="assets/videos/hike-video.mp4" type="video/mp4">
+      <video class="scrollVideo" width="100%" height="auto" muted loop>
+        <source src="assets/videos/output.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </section>
-    
+
     <section class="description-section">
       <h2>Description of the Hike</h2>
       <p>Details about the hike...</p>
@@ -147,11 +149,10 @@
   <div class="small-spacer"></div>
 
   <section class="future-adventures">
-    <div class="maps">
-      <!-- <img src="map1.jpg" alt="Future Adventure 1" class="zoom-in">
-      <img src="map2.jpg" alt="Future Adventure 2" class="zoom-in">
-      <img src="map3.jpg" alt="Future Adventure 3" class="zoom-in"> -->
-    </div>
+    <div id="map1" class="map"></div>
+    <div id="map2" class="map"></div>
+    <div id="map3" class="map"></div>
+    <!-- Additional content for each map section here -->
   </section>
 
   <div class="small-spacer"></div>
@@ -181,6 +182,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script> -->
   <script src="js/script.js"></script>
 </body>
 

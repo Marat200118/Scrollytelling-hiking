@@ -3,7 +3,7 @@ const init = () => {
   animateVariants();
   animateHistory();
   animateHeadings();
-  animateVideoSection();
+  // scrubbingVideo();
 };
 
 const animateSection = (section) => {
@@ -102,39 +102,54 @@ const animateHeadings = () => {
   });
 };
 
-const animateVideoSection = () => {
-  // Function to calculate video scroll progress
-  function calculateProgress(video) {
-    const duration = video.duration;
-    const scrollPosition = ScrollTrigger.current().scroll();
-    return scrollPosition / duration;
-  }
+// const scrubbingVideo = () => {
+//   /* 
+//     taken from https://codepen.io/shshaw/pen/vYKBPbv/9e810322d70c306de2d18237d0cb2d78?editors=0010
+//   */
+//   const $video = document.querySelector(".scrollVideo");
+//   const src = $video.currentSrc || $video.src;
+//   console.log($video, src);
 
-  // Play video on scroll
-  const video = document.getElementById("scrollVideo");
-  gsap.to(video, {
-    scrollTrigger: {
-      trigger: ".video-section",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: true,
-      pin: true,
-      onScrubComplete: () => {
-        // Transition to the description when the video ends
-        gsap.to(".video-section", { autoAlpha: 0, duration: 1 });
-        gsap.to(".description-section", { autoAlpha: 1, duration: 1 });
-      },
-      onUpdate: (self) => {
-        if (video.duration) {
-          const playTime = calculateProgress(video) * video.duration;
-          video.currentTime = playTime;
-        }
-      },
-    },
-  });
+//   /* Make sure the video is 'activated' on iOS */
+//   const once = (el, event, fn, opts) => {
+//     const onceFn = function (event) {
+//       el.removeEventListener(event, onceFn);
+//       fn.apply(this, arguments);
+//     };
+//     el.addEventListener(event, onceFn, opts);
+//     return onceFn;
+//   };
 
-  // Initial state
-  gsap.set(".description-section", { autoAlpha: 0 });
-};
+//   once(document.documentElement, "touchstart", function (event) {
+//     $video.play();
+//     $video.pause();
+//   });
+
+//   /* ---------------------------------- */
+
+//   let tl = gsap.timeline({
+//     defaults: { duration: 1 },
+//     scrollTrigger: {
+//       trigger: ".scrollVideo",
+//       start: "top top",
+//       end: "bottom bottom",
+//       markers: true,
+//       scrub: true,
+//       pin: true,
+//     },
+//   });
+//   console.log($video.duration);
+//   once($video, "loadedmetadata", () => {
+//     tl.fromTo(
+//       $video,
+//       {
+//         currentTime: 1,
+//       },
+//       {
+//         currentTime: $video.duration || 1,
+//       }
+//     );
+//   });
+// };
 
 init();
