@@ -1,17 +1,9 @@
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
-  // animateSection(".introduction");
-  // animateSection(".hobby");
-  // animateSection(".answer");
-  // animateSection(".history");
-  // animateSection(".types-locations");
-  // animateSection(".future-adventures");
-  // animateSection(".facts");
-
-  // document.querySelectorAll(".spacer").forEach(animateSpacer);
   animateVariants();
   animateHistory();
   animateHeadings();
+  animateVideoSection();
 };
 
 const animateSection = (section) => {
@@ -81,6 +73,68 @@ const animateHistory = () => {
       markers: true,
     },
   });
+};
+
+const animateHeadings = () => {
+  const containers = gsap.utils.toArray(".heading-text");
+  containers.forEach((container) => {
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container,
+        start: "top top", // Adjust these values as needed
+        end: "bottom top",
+        pin: true,
+        pinSpacing: false,
+        scrub: true,
+        markers: true,
+      },
+    });
+
+    tl.to(container, {
+      autoAlpha: 1,
+    }).to(
+      container,
+      {
+        autoAlpha: 0,
+      },
+      0.5
+    );
+  });
+};
+
+const animateVideoSection = () => {
+  // Function to calculate video scroll progress
+  function calculateProgress(video) {
+    const duration = video.duration;
+    const scrollPosition = ScrollTrigger.current().scroll();
+    return scrollPosition / duration;
+  }
+
+  // Play video on scroll
+  const video = document.getElementById("scrollVideo");
+  gsap.to(video, {
+    scrollTrigger: {
+      trigger: ".video-section",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: true,
+      pin: true,
+      onScrubComplete: () => {
+        // Transition to the description when the video ends
+        gsap.to(".video-section", { autoAlpha: 0, duration: 1 });
+        gsap.to(".description-section", { autoAlpha: 1, duration: 1 });
+      },
+      onUpdate: (self) => {
+        if (video.duration) {
+          const playTime = calculateProgress(video) * video.duration;
+          video.currentTime = playTime;
+        }
+      },
+    },
+  });
+
+  // Initial state
+  gsap.set(".description-section", { autoAlpha: 0 });
 };
 
 init();

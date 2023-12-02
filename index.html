@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Scrollytelling</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
@@ -18,20 +18,32 @@
 
 <body>
 
-  <section class="heading-section">
-    <h2 class="heading">Hi, my name is - <br> Marats</h2>
-    <h2 class="heading">Today I will tell you a story about my hobby.</h2>
-    <h2 class="heading">But before we start</h2>
-    <h2 class="heading">Try to guess, what can be my hobby?</h2>
-    <h2 class="heading">Some hint words:</h2>
-    <h2 class="heading">MAP<br>NATURE<br>FIRE</h2>
-    <div class="spacer"></div>
+  <section class="heading-text">
+    <h2>Hi, my name is - <br> Marats</h2>
   </section>
+  <section class="heading-text">
+    <h2>Today I will tell you a story<br> about my hobby</h2>
+  </section>
+  <section class="heading-text">
+    <h2>But before we start</h2>
+  </section>
+  <section class="heading-text">
+    <h2>Try to guess, what can be my hobby?</h2>
+  </section>
+  <section class="heading-text">
+    <h2>Some hint words:</h2>
+  </section>
+  <section class="heading-text">
+    <h2>MAP<br>NATURE<br>FIRE</h2>
+  </section>
+  <!-- <section class="spacer">
+  </section> -->
 
-  <div class="spacer"></div>
+  <div class="heading-spacer"></div>
 
   <section class="variants">
     <h2>What can be my hobby?</h2>
+    <div class="small-spacer"></div>
     <div class="variants-container">
       <div class="variant from-left">
         <h3>Fishing</h3>
@@ -39,8 +51,8 @@
           close
         </span>
         <p>Well, I know how to do it, and it happens couple<br> of times in a year, but it is not my passion</p>
-        <!-- <img src="assets/images/fishing.jpg" alt="Hiking" class="fade-in"> -->
       </div>
+      <div class="small-spacer"></div>
       <div class="variant from-right">
         <h3>Piano</h3>
         <span class="material-symbols-outlined cross">
@@ -48,6 +60,7 @@
         </span>
         <p>Hah, no, I don't have any clue, how to play a piano, yet..</p>
       </div>
+      <div class="small-spacer"></div>
       <div class="variant from-left">
         <h3>Horse riding</h3>
         <span class="material-symbols-outlined cross">
@@ -55,6 +68,7 @@
         </span>
         <p>Hah, no, It is definetely not the option</p>
       </div>
+      <div class="small-spacer"></div>
       <div class="variant from-right">
         <h3>Hiking</h3>
         <span class="material-symbols-outlined cross tick">
@@ -65,7 +79,7 @@
     </div>
   </section>
 
-  <div class="spacer"></div>
+  <div class="small-spacer"></div>
 
   <section class="history">
     <h2>How I started to hike?</h2>
@@ -107,20 +121,30 @@
     </div>
   </section>
 
-  <div class="spacer"></div>
+  <div class="small-spacer"></div>
 
   <section class="types-locations">
-    <h2>Different Hikes and Locations</h2>
-    <div class="types-content">
-      <!-- <img src="location_image.jpg" alt="Location" class="from-left"> -->
-      <div class="text-map from-right">
-        <p>Description of location and hike type.</p>
-        <!-- <img src="map_vector.jpg" alt="Map Vector"> -->
-      </div>
+    <div class="types-heading">
+      <h2>Different Hike types</h2>
+      <p class="types-paragraph">There is a Different types of hikes, which you can do, depending on your possibilities and
+        your physical training </p>
     </div>
+    <div class="small-spacer"></div>
+
+    <section class="video-section">
+      <video id="scrollVideo" width="100%" height="auto" muted loop>
+        <source src="assets/videos/hike-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </section>
+    
+    <section class="description-section">
+      <h2>Description of the Hike</h2>
+      <p>Details about the hike...</p>
+    </section>
   </section>
 
-  <div class="spacer"></div>
+  <div class="small-spacer"></div>
 
   <section class="future-adventures">
     <div class="maps">
@@ -130,7 +154,7 @@
     </div>
   </section>
 
-  <div class="spacer"></div>
+  <div class="small-spacer"></div>
 
   <section class="facts">
     <div class="fact">

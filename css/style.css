@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   padding: 0;
@@ -7,10 +6,10 @@ body {
   background: #f4f4f4;
   overflow-x: hidden;
 }
-
+/* 
 html, body {
   height: 100%;
-}
+} */
 
 h1 {
   font-size: 2rem;
@@ -22,6 +21,7 @@ h2 {
   font-size: 1.5rem;
   text-align: left;
   line-height: 1.2;
+  text-align: center;
 }
 
 h3 {
@@ -41,17 +41,8 @@ img {
   display: block;
 }
 
-/* section {
-  min-height: 100vh;
-  padding: 20px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-} */
-
 section {
-  padding: 20px;
+  padding: auto;
   text-align: center;
 }
 
@@ -108,18 +99,15 @@ footer {
   text-align: center;
 }
 
-.spacer {
-  height: 20vh; 
-  background-color: #f4f4f4;
-}
-
-.variants .variant {
-  min-height: 100vh;
+.variant {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 
 .variant p {
   text-align: center;
@@ -130,11 +118,6 @@ footer {
   text-align: center;
   margin: 2rem;
   font-weight: bold;
-}
-
-.variant img {
-  width: 80%;
-  border-radius: 5%;
 }
 
 .cross {
@@ -185,4 +168,34 @@ footer {
 .history-article img {
   width: 50%;
   border-radius: 2%;
+}
+
+.heading-text, .heading-spacer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  visibility: hidden;
+}
+
+.heading-spacer {
+  visibility: visible;
+}
+
+.small-spacer {
+  height: 50vh;
+}
+
+.types-paragraph {
+  text-align: center;
+  margin: 2rem;
+}
+
+.video-section {
+  width: 100%;
+  height: 100vh; /* Adjust as necessary */
+  overflow: hidden;
+  position: relative;
 }
