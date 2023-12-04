@@ -204,3 +204,7 @@ footer {
   height: 100vh; /* Adjust as needed */
   width: 100%;
 }
+
+.description-section {
+  margin-top: 3rem;
+}

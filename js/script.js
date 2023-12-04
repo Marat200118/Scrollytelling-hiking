@@ -3,38 +3,7 @@ const init = () => {
   animateVariants();
   animateHistory();
   animateHeadings();
-  // scrubbingVideo();
-};
-
-const animateSection = (section) => {
-  gsap.to(section, {
-    scrollTrigger: {
-      trigger: section,
-      start: "top top",
-      end: "bottom top",
-      pin: true,
-      scrub: true,
-      markers: false,
-    },
-  });
-};
-
-const animateSpacer = (spacer) => {
-  gsap.fromTo(
-    spacer,
-    { opacity: 0 },
-    {
-      opacity: 1,
-      duration: 1,
-      scrollTrigger: {
-        trigger: spacer,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-        markers: false,
-      },
-    }
-  );
+  scrubbingVideo();
 };
 
 const animateVariants = () => {
@@ -102,54 +71,54 @@ const animateHeadings = () => {
   });
 };
 
-// const scrubbingVideo = () => {
-//   /* 
-//     taken from https://codepen.io/shshaw/pen/vYKBPbv/9e810322d70c306de2d18237d0cb2d78?editors=0010
-//   */
-//   const $video = document.querySelector(".scrollVideo");
-//   const src = $video.currentSrc || $video.src;
-//   console.log($video, src);
+const scrubbingVideo = () => {
+  /* 
+    taken from https://codepen.io/shshaw/pen/vYKBPbv/9e810322d70c306de2d18237d0cb2d78?editors=0010
+  */
+  const $video = document.querySelector(".scrollVideo");
+  const src = $video.currentSrc || $video.src;
+  console.log($video, src);
 
-//   /* Make sure the video is 'activated' on iOS */
-//   const once = (el, event, fn, opts) => {
-//     const onceFn = function (event) {
-//       el.removeEventListener(event, onceFn);
-//       fn.apply(this, arguments);
-//     };
-//     el.addEventListener(event, onceFn, opts);
-//     return onceFn;
-//   };
+  /* Make sure the video is 'activated' on iOS */
+  const once = (el, event, fn, opts) => {
+    const onceFn = function (event) {
+      el.removeEventListener(event, onceFn);
+      fn.apply(this, arguments);
+    };
+    el.addEventListener(event, onceFn, opts);
+    return onceFn;
+  };
 
-//   once(document.documentElement, "touchstart", function (event) {
-//     $video.play();
-//     $video.pause();
-//   });
+  once(document.documentElement, "touchstart", function (event) {
+    $video.play();
+    $video.pause();
+  });
 
-//   /* ---------------------------------- */
+  /* ---------------------------------- */
 
-//   let tl = gsap.timeline({
-//     defaults: { duration: 1 },
-//     scrollTrigger: {
-//       trigger: ".scrollVideo",
-//       start: "top top",
-//       end: "bottom bottom",
-//       markers: true,
-//       scrub: true,
-//       pin: true,
-//     },
-//   });
-//   console.log($video.duration);
-//   once($video, "loadedmetadata", () => {
-//     tl.fromTo(
-//       $video,
-//       {
-//         currentTime: 1,
-//       },
-//       {
-//         currentTime: $video.duration || 1,
-//       }
-//     );
-//   });
-// };
+  let tl = gsap.timeline({
+    defaults: { duration: 1 },
+    scrollTrigger: {
+      trigger: ".video-section",
+      start: "top top",
+      end: "bottom top",
+      markers: true,
+      scrub: 1.2,
+      pin: ".scrollVideo",
+    },
+  });
+  console.log($video.duration);
+  once($video, "loadedmetadata", () => {
+    tl.fromTo(
+      $video,
+      {
+        currentTime: 1,
+      },
+      {
+        currentTime: $video.duration || 1,
+      }
+    );
+  });
+};
 
 init();
