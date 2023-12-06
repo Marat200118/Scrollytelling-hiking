@@ -4,6 +4,7 @@ const init = () => {
   animateHistory();
   animateHeadings();
   scrubbingVideo();
+  animateRectangle();
 };
 
 const animateVariants = () => {
@@ -105,6 +106,7 @@ const scrubbingVideo = () => {
       markers: true,
       scrub: 1.2,
       pin: ".scrollVideo",
+      pin: true,
     },
   });
   console.log($video.duration);
@@ -118,6 +120,28 @@ const scrubbingVideo = () => {
         currentTime: $video.duration || 1,
       }
     );
+  });
+};
+
+const animateRectangle = () => {
+  document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(MotionPathPlugin);
+
+    gsap.to(".rectangle", {
+      scrollTrigger: {
+        trigger: ".rectangle-section",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1,
+        opacity: 0,
+        markers: true,
+      },
+      motionPath: {
+        path: ".path-for-rectangle",
+        align: ".path-for-rectangle",
+        autoRotate: true,
+      },
+    });
   });
 };
 
