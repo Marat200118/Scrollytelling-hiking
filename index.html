@@ -8,7 +8,7 @@
   <title>Scrollytelling</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
-  <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" /> -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
@@ -175,7 +175,8 @@
           Water hiking is a great way to explore the nature and to enjoy the water. It is a great way to spend time
           with friends and to have fun. I usually do it in the summer, when the weather is hot and I want to refresh
           myself.
-          I love to do it in the our big Latvian lakes, so you can travel from one place to another and enjoy the different spots to spend the nights.
+          I love to do it in the our big Latvian lakes, so you can travel from one place to another and enjoy the
+          different spots to spend the nights.
         </p>
         <div class="rectangle-section">
           <svg class="rectangle" height="50" width="50" viewBox="0 0 45 45" fill="none"
@@ -187,18 +188,53 @@
           </svg>
         </div>
       </section>
+    </arcticle>
 
+
+    <arcticle class="hike-type">
+      <section class="video-section">
+        <video class="scrollVideo" width="100%" height="auto" muted playsinline preload="auto">
+          <source src="assets/videos/fire.mp4" type="video/mp4">
+        </video>
+      </section>
+
+      <section class="description-section">
+        <h2>"Extremal hike"</h2>
+        <p>
+          Extremal hiking, is when you bring only the most necessary things, and you have to survive in the wild nature.
+          The thing is, that besides the surviving, you also need to make a minimal comfort for yourself, so you can
+          not only "survive", but also enjoy the process.
+        </p>
+        <div class="rectangle-section">
+          <svg class="rectangle" height="50" width="50" viewBox="0 0 45 45" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="5" width="35" height="35" fill="#333" />
+          </svg>
+          <svg width="100%" height="500" viewBox="0 0 800 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="path-for-rectangle" d="M100 100C200 400, 500 100, 700 200S400 900, 100 1000" fill="none" />
+          </svg>
+        </div>
+      </section>
     </arcticle>
 
 
   </section>
 
-  <div class="small-spacer"></div>
+  <!-- <div class="small-spacer"></div> -->
 
   <section class="future-adventures">
-    <div id="map1" class="map"></div>
-    <div id="map2" class="map"></div>
-    <div id="map3" class="map"></div>
+    <div class="adventure">
+      <div id="map1" class="map" data-location="lat1,lng1,zoom1"></div>
+      <div class="adventure-description">
+        <h2>Himalayas</h2>
+        <p>My dream is to go to the Himalayas, and to climb the highest mountain in the world - Everest. I know, that it
+          is a very hard challenge, but I am ready to accept it. I am prepairing myself for this challenge, and I hope
+          that one day I will be able to do it.
+        </p>
+      </div>
+    </div>
+    <!-- <div id="map2" class="map" data-location="lat2,lng2,zoom2"></div>
+    <div id="map3" class="map" data-location="lat3,lng3,zoom3"></div> -->
     <!-- Additional content for each map section here -->
   </section>
 
@@ -229,7 +265,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <!-- <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script> -->
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/MotionPathPlugin.min.js"></script>
   <script src="js/script.js"></script>
 </body>

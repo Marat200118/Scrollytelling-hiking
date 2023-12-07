@@ -5,6 +5,7 @@ const init = () => {
   animateHeadings();
   scrubbingVideo();
   animateRectangle();
+  animateMaps();
 };
 
 const animateVariants = () => {
@@ -142,6 +143,54 @@ const animateRectangle = () => {
         autoRotate: true,
       },
     });
+  });
+};
+
+const animateMaps = () => {
+  const himalayasCoordinates = [27.9878, 86.925];
+  const himalayasZoomLevel = 5;
+
+  document.querySelectorAll(".map").forEach((mapDiv, i) => {
+    let map = L.map(mapDiv.id, {
+      center: himalayasCoordinates,
+      zoom: himalayasZoomLevel,
+      zoomControl: false,
+      dragging: false,
+      scrollWheelZoom: false,
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+    }).addTo(map);
+
+    const adventureDiv = mapDiv.closest(".adventure");
+    const adventureDesc = adventureDiv.querySelector(".adventure-description");
+
+    gsap.set(adventureDesc, { autoAlpha: 0 });
+
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: mapDiv,
+        start: "top top",
+        end: "bottom top",
+        pin: true,
+        scrub: true,
+        markers: true,
+      },
+    });
+
+    tl.to(map, {
+      onStart: () => map.flyTo(himalayasCoordinates, himalayasZoomLevel + 6),
+      onReverseComplete: () =>
+        map.flyTo(himalayasCoordinates, himalayasZoomLevel),
+    });
+
+    tl.to(mapDiv, { autoAlpha: 0 }).fromTo(
+      adventureDesc,
+      { autoAlpha: 0, y: 50 },
+      { autoAlpha: 1, y: 0, duration: 1 },
+      "-=0.5"
+    );
   });
 };
 
