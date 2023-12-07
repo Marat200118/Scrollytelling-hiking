@@ -52,7 +52,7 @@ const animateHistory = () => {
       end: () =>
         "+=" + historyContainer.offsetWidth * (historyPanels.length - 1),
       scrub: true,
-      markers: true,
+      markers: false,
     },
   });
 };
@@ -68,7 +68,7 @@ const animateHeadings = () => {
         pin: true,
         pinSpacing: false,
         scrub: true,
-        markers: true,
+        markers: false,
       },
     });
 
@@ -111,7 +111,7 @@ const scrubbingVideo = () => {
         trigger: video.parentElement,
         start: "top top",
         end: "bottom top",
-        markers: true,
+        markers: false,
         scrub: 1.2,
         pin: true,
       },
@@ -138,7 +138,7 @@ const animateRectangle = () => {
         end: "bottom bottom",
         scrub: 1,
         opacity: 0,
-        markers: true,
+        markers: false,
       },
       motionPath: {
         path: ".path-for-rectangle",
@@ -151,59 +151,132 @@ const animateRectangle = () => {
 
 const animateMaps = () => {
   mapboxgl.accessToken =
-    "pk.eyJ1IjoibXMxODAxNiIsImEiOiJja2dnZ3lmemswMHV6MnNzMDB0bWUxcGQ0In0.3pyWk-wGiKUF_Lzp40eKZw";
+    "pk.eyJ1IjoibXMxODAxNiIsImEiOiJja2dnZ3lmemswMHV6MnNzMDB0bWUxcGQ0In0.3pyWk-wGiKUF_Lzp40eKZw"; // Replace with your Mapbox access token
 
   const map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/streets-v11",
-    center: [28.5983, 83.9311],
-    zoom: 1,
-  }); map.scrollZoom.disable();
+    center: [56.947407778, 24.106875278],
+    zoom: 0,
+  });
+  map.scrollZoom.disable();
 
   const chapters = {
-    himalayas: {
-      center: [28.5983, 83.9311],
-      zoom: 5,
-      bearing: 0,
-      UserActivation: false,
-      // Add other properties like bearing, pitch, etc.
-    }, 
-    himalayas: {
-      center: [28.5983, 83.9311],
-      zoom: 5,
-      bearing: 0,
-      allowZoom: false,
-      // Add other properties like bearing, pitch, etc.
-    },
+    himalayas: { center: [56.947407778, 24.106875278], zoom: 5 },
+    alps: { center: [45.8326, 6.8652], zoom: 5 },
+    andes: { center: [-40.6532, -10.0109], zoom: 5 },
   };
 
-  let activeChapterName = "himalayas";
-
-  function setActiveChapter(chapterName) {
-    if (chapterName === activeChapterName) return;
+  function updateMapAndContent(chapterName) {
     map.flyTo(chapters[chapterName]);
 
-    document.getElementById(chapterName).classList.add("active");
-    if (activeChapterName) {
-      document.getElementById(activeChapterName).classList.remove("active");
-    }
-    activeChapterName = chapterName;
-  }
-
-  function isElementOnScreen(id) {
-    const element = document.getElementById(id);
-    const bounds = element.getBoundingClientRect();
-    return bounds.top < window.innerHeight && bounds.bottom > 0;
-  }
-
-  window.onscroll = () => {
-    for (const chapterName in chapters) {
-      if (isElementOnScreen(chapterName)) {
-        setActiveChapter(chapterName);
-        break;
+    gsap.utils.toArray(".adventure section").forEach((section) => {
+      if (section.classList.contains(chapterName)) {
+        gsap.to(section, {
+          autoAlpha: 1,
+          display: "block",
+          duration: 1,
+          ease: "power1.inOut",
+        });
+      } else {
+        gsap.to(section, {
+          autoAlpha: 0,
+          display: "none",
+          duration: 1,
+          ease: "power1.inOut",
+        });
       }
-    }
-  };
+    });
+  }
+
+  updateMapAndContent("alps");
+
+  Object.keys(chapters).forEach((chapterName) => {
+    ScrollTrigger.create({
+      trigger: `.${chapterName}`,
+      start: "top top",
+      end: "bottom top",
+      pin: true,
+      markers: true,
+      onEnter: () => updateMapAndContent(chapterName),
+      onEnterBack: () => updateMapAndContent(chapterName),
+    });
+  });
+
+  ScrollTrigger.create({
+    trigger: ".adventure",
+    start: "top top",
+    end: "bottom top",
+    scrub: true,
+    pin: true,
+    markers: false,
+  });
 };
+
+// const animateMaps = () => {
+//   mapboxgl.accessToken =
+//     "pk.eyJ1IjoibXMxODAxNiIsImEiOiJja2dnZ3lmemswMHV6MnNzMDB0bWUxcGQ0In0.3pyWk-wGiKUF_Lzp40eKZw";
+
+//   const map = new mapboxgl.Map({
+//     container: "map",
+//     style: "mapbox://styles/mapbox/streets-v11",
+//     center: [56.947407778, 24.106875278],
+//     zoom: 0,
+//   });
+
+//   // Ensure map is loaded before setting up ScrollTrigger
+//   map.on("load", function () {
+//     const chapters = {
+//       himalayas: { center: [56.947407778, 24.106875278], zoom: 5 },
+//       alps: { center: [45.8326, 6.8652], zoom: 5 },
+//       andes: { center: [-40.6532, -10.0109], zoom: 5 },
+//     };
+
+//     let activeChapterName = "himalayas";
+
+//     // Setup ScrollTrigger for the entire future adventures section
+//     ScrollTrigger.create({
+//       trigger: ".future-adventures",
+//       start: "top top",
+//       end: "+=100%",
+//       pin: true,
+//       scrub: true,
+//       markers: true,
+//       onUpdate: (self) => {
+//         let chapterToActivate = activeChapterName;
+//         for (const chapterName in chapters) {
+//           if (isElementInViewport(`.${chapterName}`)) {
+//             chapterToActivate = chapterName;
+//             break;
+//           }
+//         }
+//         if (chapterToActivate !== activeChapterName) {
+//           setActiveChapter(chapterToActivate);
+//         }
+//       },
+//       onLeaveBack: () => {
+//         setActiveChapter("himalayas");
+//       },
+//     });
+
+//     function setActiveChapter(chapterName) {
+//       if (chapterName === activeChapterName) return;
+
+//       map.flyTo(chapters[chapterName]);
+//       document.querySelectorAll(".features section").forEach((section) => {
+//         section.classList.remove("active");
+//       });
+//       document.querySelector(`.${chapterName}`).classList.add("active");
+
+//       activeChapterName = chapterName;
+//     }
+
+//     function isElementInViewport(selector) {
+//       const element = document.querySelector(selector);
+//       const bounds = element.getBoundingClientRect();
+//       return bounds.top < window.innerHeight && bounds.bottom > 0;
+//     }
+//   });
+// };
 
 init();
