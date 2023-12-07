@@ -200,11 +200,6 @@ footer {
   position: relative;
 }
 
-.map {
-  height: 70vh;
-  /* width: 100%; */
-}
-
 .description-section {
   margin-top: 5rem;
 }
@@ -221,3 +216,39 @@ footer {
   margin: auto;
   gap: 2rem;
 }
+
+.adventure {
+  display: flex;
+  flex-direction: column-reverse; /* Adjusts the order */
+}
+
+.map {
+  height: 300px; /* Adjust height as needed */
+  width: 100%;
+}
+
+
+
+    #features {
+        position: relative;
+        width: 50%;
+        margin-left: 50%;
+        font-family: sans-serif;
+        overflow-y: scroll;
+        height: 100%;
+        background-color: #fafafa;
+    }
+    #features section {
+        padding: 25px 50px;
+        line-height: 25px;
+        border-bottom: 1px solid #ddd;
+        opacity: 0.25;
+        font-size: 13px;
+    }
+    #features section.active {
+        opacity: 1;
+    }
+    #features section:last-child {
+        border-bottom: none;
+        margin-bottom: 200px;
+    }

@@ -1,4 +1,15 @@
 const init = () => {
+  // videos = document.querySelectorAll(".scrollVideo");
+
+  // const videosForEach = async () => {
+  //   videos.forEach((video) => {
+  //     const video = document.querySelector(".scrollVideo");
+  //     const videoDataBlob = await fetch(video.src).then((res) => res.blob());
+  //     const videoDataUrl = URL.createObjectURL(videoDataBlob);
+  //     video.src = videoDataUrl;
+  //   });
+  // };
+  // videosForEach();
   gsap.registerPlugin(ScrollTrigger);
   animateVariants();
   animateHistory();
@@ -52,7 +63,7 @@ const animateHeadings = () => {
     let tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
-        start: "top top", // Adjust these values as needed
+        start: "top top",
         end: "bottom top",
         pin: true,
         pinSpacing: false,
@@ -74,53 +85,45 @@ const animateHeadings = () => {
 };
 
 const scrubbingVideo = () => {
-  /* 
-    taken from https://codepen.io/shshaw/pen/vYKBPbv/9e810322d70c306de2d18237d0cb2d78?editors=0010
-  */
-  const $video = document.querySelector(".scrollVideo");
-  const src = $video.currentSrc || $video.src;
-  console.log($video, src);
+  // Select all videos
+  const videos = document.querySelectorAll(".scrollVideo");
 
-  /* Make sure the video is 'activated' on iOS */
-  const once = (el, event, fn, opts) => {
-    const onceFn = function (event) {
-      el.removeEventListener(event, onceFn);
-      fn.apply(this, arguments);
+  videos.forEach((video) => {
+    // Ensure the video is 'activated' on iOS
+    const once = (el, event, fn, opts) => {
+      const onceFn = function (event) {
+        el.removeEventListener(event, onceFn);
+        fn.apply(this, arguments);
+      };
+      el.addEventListener(event, onceFn, opts);
+      return onceFn;
     };
-    el.addEventListener(event, onceFn, opts);
-    return onceFn;
-  };
 
-  once(document.documentElement, "touchstart", function (event) {
-    $video.play();
-    $video.pause();
-  });
+    once(document.documentElement, "touchstart", function (event) {
+      video.play();
+      video.pause();
+    });
 
-  /* ---------------------------------- */
-
-  let tl = gsap.timeline({
-    defaults: { duration: 1 },
-    scrollTrigger: {
-      trigger: ".video-section",
-      start: "top top",
-      end: "bottom top",
-      markers: true,
-      scrub: 1.2,
-      pin: ".scrollVideo",
-      pin: true,
-    },
-  });
-  console.log($video.duration);
-  once($video, "loadedmetadata", () => {
-    tl.fromTo(
-      $video,
-      {
-        currentTime: 1,
+    // Create timeline for each video
+    let tl = gsap.timeline({
+      defaults: { duration: 1 },
+      scrollTrigger: {
+        trigger: video.parentElement,
+        start: "top top",
+        end: "bottom top",
+        markers: true,
+        scrub: 1.2,
+        pin: true,
       },
-      {
-        currentTime: $video.duration || 1,
-      }
-    );
+    });
+
+    once(video, "loadedmetadata", () => {
+      tl.fromTo(
+        video,
+        { currentTime: 0 },
+        { currentTime: video.duration || 1 }
+      );
+    });
   });
 };
 
@@ -147,51 +150,60 @@ const animateRectangle = () => {
 };
 
 const animateMaps = () => {
-  const himalayasCoordinates = [27.9878, 86.925];
-  const himalayasZoomLevel = 5;
+  mapboxgl.accessToken =
+    "pk.eyJ1IjoibXMxODAxNiIsImEiOiJja2dnZ3lmemswMHV6MnNzMDB0bWUxcGQ0In0.3pyWk-wGiKUF_Lzp40eKZw";
 
-  document.querySelectorAll(".map").forEach((mapDiv, i) => {
-    let map = L.map(mapDiv.id, {
-      center: himalayasCoordinates,
-      zoom: himalayasZoomLevel,
-      zoomControl: false,
-      dragging: false,
-      scrollWheelZoom: false,
-    });
+  const map = new mapboxgl.Map({
+    container: "map",
+    style: "mapbox://styles/mapbox/streets-v11",
+    center: [28.5983, 83.9311],
+    zoom: 1,
+  }); map.scrollZoom.disable();
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-    }).addTo(map);
+  const chapters = {
+    himalayas: {
+      center: [28.5983, 83.9311],
+      zoom: 5,
+      bearing: 0,
+      UserActivation: false,
+      // Add other properties like bearing, pitch, etc.
+    }, 
+    himalayas: {
+      center: [28.5983, 83.9311],
+      zoom: 5,
+      bearing: 0,
+      allowZoom: false,
+      // Add other properties like bearing, pitch, etc.
+    },
+  };
 
-    const adventureDiv = mapDiv.closest(".adventure");
-    const adventureDesc = adventureDiv.querySelector(".adventure-description");
+  let activeChapterName = "himalayas";
 
-    gsap.set(adventureDesc, { autoAlpha: 0 });
+  function setActiveChapter(chapterName) {
+    if (chapterName === activeChapterName) return;
+    map.flyTo(chapters[chapterName]);
 
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: mapDiv,
-        start: "top top",
-        end: "bottom top",
-        pin: true,
-        scrub: true,
-        markers: true,
-      },
-    });
+    document.getElementById(chapterName).classList.add("active");
+    if (activeChapterName) {
+      document.getElementById(activeChapterName).classList.remove("active");
+    }
+    activeChapterName = chapterName;
+  }
 
-    tl.to(map, {
-      onStart: () => map.flyTo(himalayasCoordinates, himalayasZoomLevel + 6),
-      onReverseComplete: () =>
-        map.flyTo(himalayasCoordinates, himalayasZoomLevel),
-    });
+  function isElementOnScreen(id) {
+    const element = document.getElementById(id);
+    const bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 0;
+  }
 
-    tl.to(mapDiv, { autoAlpha: 0 }).fromTo(
-      adventureDesc,
-      { autoAlpha: 0, y: 50 },
-      { autoAlpha: 1, y: 0, duration: 1 },
-      "-=0.5"
-    );
-  });
+  window.onscroll = () => {
+    for (const chapterName in chapters) {
+      if (isElementOnScreen(chapterName)) {
+        setActiveChapter(chapterName);
+        break;
+      }
+    }
+  };
 };
 
 init();
