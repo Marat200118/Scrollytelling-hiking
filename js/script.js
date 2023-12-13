@@ -17,6 +17,7 @@ const init = () => {
   scrubbingVideo();
   animateRectangle();
   animateMaps();
+  animateFacts();
 };
 
 const animateVariants = () => {
@@ -156,15 +157,15 @@ const animateMaps = () => {
   const map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/streets-v11",
-    center: [56.947407778, 24.106875278],
+    // center: [56.947407778, 24.106875278],
     zoom: 0,
   });
   map.scrollZoom.disable();
 
   const chapters = {
-    himalayas: { center: [56.947407778, 24.106875278], zoom: 5 },
-    alps: { center: [45.8326, 6.8652], zoom: 5 },
-    andes: { center: [-40.6532, -10.0109], zoom: 5 },
+    himalayas: { center: [86.420679, 27.772537], zoom: 7 },
+    alps: { center: [10.8326, 45.8652], zoom: 9 },
+    // andes: { center: [-40.6532, -10.0109], zoom: 5 },
   };
 
   function updateMapAndContent(chapterName) {
@@ -189,7 +190,7 @@ const animateMaps = () => {
     });
   }
 
-  updateMapAndContent("alps");
+  // updateMapAndContent("himalayas");
 
   Object.keys(chapters).forEach((chapterName) => {
     ScrollTrigger.create({
@@ -213,70 +214,26 @@ const animateMaps = () => {
   });
 };
 
-// const animateMaps = () => {
-//   mapboxgl.accessToken =
-//     "pk.eyJ1IjoibXMxODAxNiIsImEiOiJja2dnZ3lmemswMHV6MnNzMDB0bWUxcGQ0In0.3pyWk-wGiKUF_Lzp40eKZw";
+const animateFacts = () => {
+  const targetNumbers = [500, 1200, 800, 300];
 
-//   const map = new mapboxgl.Map({
-//     container: "map",
-//     style: "mapbox://styles/mapbox/streets-v11",
-//     center: [56.947407778, 24.106875278],
-//     zoom: 0,
-//   });
+  gsap.utils.toArray(".facts .fact").forEach((fact, index) => {
+    const numberSpan = fact.querySelector(".number");
 
-//   // Ensure map is loaded before setting up ScrollTrigger
-//   map.on("load", function () {
-//     const chapters = {
-//       himalayas: { center: [56.947407778, 24.106875278], zoom: 5 },
-//       alps: { center: [45.8326, 6.8652], zoom: 5 },
-//       andes: { center: [-40.6532, -10.0109], zoom: 5 },
-//     };
-
-//     let activeChapterName = "himalayas";
-
-//     // Setup ScrollTrigger for the entire future adventures section
-//     ScrollTrigger.create({
-//       trigger: ".future-adventures",
-//       start: "top top",
-//       end: "+=100%",
-//       pin: true,
-//       scrub: true,
-//       markers: true,
-//       onUpdate: (self) => {
-//         let chapterToActivate = activeChapterName;
-//         for (const chapterName in chapters) {
-//           if (isElementInViewport(`.${chapterName}`)) {
-//             chapterToActivate = chapterName;
-//             break;
-//           }
-//         }
-//         if (chapterToActivate !== activeChapterName) {
-//           setActiveChapter(chapterToActivate);
-//         }
-//       },
-//       onLeaveBack: () => {
-//         setActiveChapter("himalayas");
-//       },
-//     });
-
-//     function setActiveChapter(chapterName) {
-//       if (chapterName === activeChapterName) return;
-
-//       map.flyTo(chapters[chapterName]);
-//       document.querySelectorAll(".features section").forEach((section) => {
-//         section.classList.remove("active");
-//       });
-//       document.querySelector(`.${chapterName}`).classList.add("active");
-
-//       activeChapterName = chapterName;
-//     }
-
-//     function isElementInViewport(selector) {
-//       const element = document.querySelector(selector);
-//       const bounds = element.getBoundingClientRect();
-//       return bounds.top < window.innerHeight && bounds.bottom > 0;
-//     }
-//   });
-// };
+    gsap.to(numberSpan, {
+      innerHTML: targetNumbers[index],
+      scrollTrigger: {
+        trigger: fact,
+        start: "top 50%",
+        end: "top 20%",
+        scrub: true,
+        markers: false,
+        onUpdate: () => {
+          numberSpan.innerHTML = Math.ceil(numberSpan.innerHTML);
+        },
+      },
+    });
+  });
+};
 
 init();
