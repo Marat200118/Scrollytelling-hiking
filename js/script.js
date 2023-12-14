@@ -175,14 +175,24 @@ const animateMaps = () => {
       if (section.classList.contains(chapterName)) {
         gsap.to(section, {
           autoAlpha: 1,
-          display: "block",
           duration: 1,
           ease: "power1.inOut",
         });
       } else {
         gsap.to(section, {
           autoAlpha: 0,
-          display: "none",
+
+          duration: 1,
+          ease: "power1.inOut",
+        });
+      }
+    });
+  }
+  function leaveMapAndContent(chapterName) {
+    gsap.utils.toArray(".adventure section").forEach((section) => {
+      if (section.classList.contains(chapterName)) {
+        gsap.to(section, {
+          autoAlpha: 0,
           duration: 1,
           ease: "power1.inOut",
         });
@@ -197,10 +207,12 @@ const animateMaps = () => {
       trigger: `.${chapterName}`,
       start: "top top",
       end: "bottom top",
+      pinSpacing: false,
       pin: true,
-      markers: true,
+      markers: false,
       onEnter: () => updateMapAndContent(chapterName),
       onEnterBack: () => updateMapAndContent(chapterName),
+      onLeave: () => leaveMapAndContent(chapterName),
     });
   });
 
@@ -209,6 +221,7 @@ const animateMaps = () => {
     start: "top top",
     end: "bottom top",
     scrub: true,
+    // pinSpacing: false,
     pin: true,
     markers: false,
   });
@@ -216,6 +229,7 @@ const animateMaps = () => {
 
 const animateFacts = () => {
   const targetNumbers = [500, 1200, 800, 300];
+  const facts = document.querySelector(".facts");
 
   gsap.utils.toArray(".facts .fact").forEach((fact, index) => {
     const numberSpan = fact.querySelector(".number");
@@ -224,15 +238,24 @@ const animateFacts = () => {
       innerHTML: targetNumbers[index],
       scrollTrigger: {
         trigger: fact,
-        start: "top 50%",
-        end: "top 20%",
+        start: "top bottom",
+        end: "bottom 20%",
         scrub: true,
-        markers: false,
+        markers: true,
         onUpdate: () => {
           numberSpan.innerHTML = Math.ceil(numberSpan.innerHTML);
         },
       },
     });
+  });
+  gsap.to(facts, {
+    scrollTrigger: {
+      trigger: facts,
+      start: "top 20%",
+      pin: true,
+      end: "bottom top",
+      markers: false,
+    },
   });
 };
 
