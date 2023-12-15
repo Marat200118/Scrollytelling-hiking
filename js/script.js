@@ -1,21 +1,9 @@
 const init = () => {
-  // videos = document.querySelectorAll(".scrollVideo");
-
-  // const videosForEach = async () => {
-  //   videos.forEach((video) => {
-  //     const video = document.querySelector(".scrollVideo");
-  //     const videoDataBlob = await fetch(video.src).then((res) => res.blob());
-  //     const videoDataUrl = URL.createObjectURL(videoDataBlob);
-  //     video.src = videoDataUrl;
-  //   });
-  // };
-  // videosForEach();
   gsap.registerPlugin(ScrollTrigger);
   animateVariants();
   animateHistory();
   animateHeadings();
   scrubbingVideo();
-  animateRectangle();
   animateMaps();
   animateFacts();
 };
@@ -86,11 +74,9 @@ const animateHeadings = () => {
 };
 
 const scrubbingVideo = () => {
-  // Select all videos
   const videos = document.querySelectorAll(".scrollVideo");
 
   videos.forEach((video) => {
-    // Ensure the video is 'activated' on iOS
     const once = (el, event, fn, opts) => {
       const onceFn = function (event) {
         el.removeEventListener(event, onceFn);
@@ -105,7 +91,6 @@ const scrubbingVideo = () => {
       video.pause();
     });
 
-    // Create timeline for each video
     let tl = gsap.timeline({
       defaults: { duration: 1 },
       scrollTrigger: {
@@ -128,28 +113,6 @@ const scrubbingVideo = () => {
   });
 };
 
-const animateRectangle = () => {
-  document.addEventListener("DOMContentLoaded", function () {
-    gsap.registerPlugin(MotionPathPlugin);
-
-    gsap.to(".rectangle", {
-      scrollTrigger: {
-        trigger: ".rectangle-section",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-        opacity: 0,
-        markers: false,
-      },
-      motionPath: {
-        path: ".path-for-rectangle",
-        align: ".path-for-rectangle",
-        autoRotate: true,
-      },
-    });
-  });
-};
-
 const animateMaps = () => {
   mapboxgl.accessToken =
     "pk.eyJ1IjoibXMxODAxNiIsImEiOiJja2dnZ3lmemswMHV6MnNzMDB0bWUxcGQ0In0.3pyWk-wGiKUF_Lzp40eKZw"; // Replace with your Mapbox access token
@@ -157,7 +120,6 @@ const animateMaps = () => {
   const map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/streets-v11",
-    // center: [56.947407778, 24.106875278],
     zoom: 0,
   });
   map.scrollZoom.disable();
@@ -165,7 +127,7 @@ const animateMaps = () => {
   const chapters = {
     himalayas: { center: [86.420679, 27.772537], zoom: 7 },
     alps: { center: [10.8326, 45.8652], zoom: 9 },
-    // andes: { center: [-40.6532, -10.0109], zoom: 5 },
+    andes: { center: [-75.6532, -10.0109], zoom: 7 },
   };
 
   function updateMapAndContent(chapterName) {
@@ -181,7 +143,6 @@ const animateMaps = () => {
       } else {
         gsap.to(section, {
           autoAlpha: 0,
-
           duration: 1,
           ease: "power1.inOut",
         });
@@ -221,7 +182,6 @@ const animateMaps = () => {
     start: "top top",
     end: "bottom top",
     scrub: true,
-    // pinSpacing: false,
     pin: true,
     markers: false,
   });
@@ -241,7 +201,7 @@ const animateFacts = () => {
         start: "top bottom",
         end: "bottom 20%",
         scrub: true,
-        markers: true,
+        markers: false,
         onUpdate: () => {
           numberSpan.innerHTML = Math.ceil(numberSpan.innerHTML);
         },
@@ -251,6 +211,7 @@ const animateFacts = () => {
   gsap.to(facts, {
     scrollTrigger: {
       trigger: facts,
+      pinSpacing: false,
       start: "top 20%",
       pin: true,
       end: "bottom top",

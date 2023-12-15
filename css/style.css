@@ -6,10 +6,6 @@ body {
   background: #f4f4f4;
   overflow-x: hidden;
 }
-/* 
-html, body {
-  height: 100%;
-} */
 
 h1 {
   font-size: 2rem;
@@ -68,12 +64,6 @@ section {
   align-items: center;
 }
 
-/* .types-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
-
 .text-map {
   text-align: left;
 }
@@ -81,7 +71,6 @@ section {
 .maps {
   overflow: hidden;
 }
-
 
 .fact {
   margin-bottom: 10px;
@@ -93,7 +82,10 @@ section {
 }
 
 footer {
-  background-color: #7cd3d6;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #001213;
   color: white;
   padding: 10px;
   text-align: center;
@@ -134,7 +126,7 @@ footer {
 
 .history {
   overflow: hidden;
-  position: relative; /* Needed for proper functioning of ScrollTrigger */
+  position: relative;
 }
 
 .history-container {
@@ -223,15 +215,15 @@ footer {
   opacity: 80%;
 }
 
+
 .himalayas, .alps, .andes {
   height: 100vh;
-}
-
-.himalayas, .alps, .andes p{
-  display: flex !important;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  transform: translate(0,0);
 }
 
 .facts {
