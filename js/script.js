@@ -115,7 +115,7 @@ const scrubbingVideo = () => {
 
 const animateMaps = () => {
   mapboxgl.accessToken =
-    "pk.eyJ1IjoibXMxODAxNiIsImEiOiJja2dnZ3lmemswMHV6MnNzMDB0bWUxcGQ0In0.3pyWk-wGiKUF_Lzp40eKZw"; // Replace with your Mapbox access token
+    "pk.eyJ1IjoibXMxODAxNiIsImEiOiJja2dnZ3lmemswMHV6MnNzMDB0bWUxcGQ0In0.3pyWk-wGiKUF_Lzp40eKZw";
 
   const map = new mapboxgl.Map({
     container: "map",
@@ -161,8 +161,6 @@ const animateMaps = () => {
     });
   }
 
-  // updateMapAndContent("himalayas");
-
   Object.keys(chapters).forEach((chapterName) => {
     ScrollTrigger.create({
       trigger: `.${chapterName}`,
@@ -188,7 +186,7 @@ const animateMaps = () => {
 };
 
 const animateFacts = () => {
-  const targetNumbers = [500, 1200, 800, 300];
+  const targetNumbers = [12, 900, 1500, 63];
   const facts = document.querySelector(".facts");
 
   gsap.utils.toArray(".facts .fact").forEach((fact, index) => {
@@ -199,7 +197,7 @@ const animateFacts = () => {
       scrollTrigger: {
         trigger: fact,
         start: "top bottom",
-        end: "bottom 20%",
+        end: "bottom 45%",
         scrub: true,
         markers: false,
         onUpdate: () => {
@@ -211,7 +209,7 @@ const animateFacts = () => {
   gsap.to(facts, {
     scrollTrigger: {
       trigger: facts,
-      pinSpacing: false,
+      pinSpacing: true,
       start: "top 20%",
       pin: true,
       end: "bottom top",
